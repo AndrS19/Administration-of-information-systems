@@ -1,2 +1,2 @@
 # Administration-of-information-systems
-Sukhyi Andrii
+Sukhyi Andrii IT-23
