@@ -1,0 +1,32 @@
+---
+- hosts: all
+  user: testandr
+  become: true
+  become_method: sudo
+  tasks:
+    - debug:
+        msg: "{{ env }}"
+
+    - name: Get users
+      shell: "cat /etc/passwd"
+      no_log: true
+
+    - name: Get hostname
+      shell: "cat /etc/hostname"
+      register: hostname
+
+    - name: What is in var hostname?
+      debug:
+        msg: "{{ hostname.stdout }}"
+
+    - name: repurpose var
+      set_fact:
+        env: "{{ hostname.stdout }}"
+
+    - debug:
+        msg: "{{ env }}"
+
+    - name: Install tree on andrii-sukhyi-lab2
+      apt:
+        name: tree
+      when: hostname.stdout == "andrii-sukhyi-lab2"

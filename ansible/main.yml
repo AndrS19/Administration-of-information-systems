@@ -1,0 +1,8 @@
+---
+- hosts: all
+  user: testandr
+  become: true
+  become_method: sudo
+  tasks:
+  - include_role:
+     name: dummy_role

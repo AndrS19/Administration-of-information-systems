@@ -1,0 +1,26 @@
+---
+- hosts: all
+  user: testandr
+  become: true
+  become_method: sudo
+
+  vars:
+   package_name: "{{ package_name }}"
+
+  tasks:
+    - name: Get hostname
+      shell: "cat /etc/hostname"
+      register: hostname
+
+    - name: What is in var hostname?
+      debug:
+        msg: "{{ hostname.stdout }}"
+
+    - name: Install package on andrii-sukhyi-lab2
+      apt:
+        name: "{{ package_name }}"
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - debug:
+        msg: "{{ package_name }}"
