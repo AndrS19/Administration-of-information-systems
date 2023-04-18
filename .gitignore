@@ -41,3 +41,4 @@ builds/
 !provider.tf
 
 virtualbox.box
+terraform.exe
